@@ -1,8 +1,8 @@
 # Kuato
 
-Find what you discussed, what decisions you made, and where you left off.
+Easily recall what you discussed with your favorite coding agents, what decisions you made, and where you left off so you can pick up where you left off as easily as asking "where did we leave off on XYZ..."
 
-A simple, fully local session recall skill for Claude Code & other coding agents that support skills. 
+This simple, fully local session recall skill works on Claude Code & other coding agents that support skills. Instant use with text search, optional local postgres with faster and more accurate search on larger session histories. 
 
 ## The Problem
 
