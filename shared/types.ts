@@ -1,5 +1,5 @@
 /**
- * Types for Claude Code session JSONL format
+ * Types for Claude Code and Pi Agent session JSONL formats
  */
 
 export interface SessionMessage {
@@ -96,6 +96,64 @@ export interface SearchResult extends ParsedSession {
 }
 
 /**
+ * Pi Agent session message formats
+ */
+export interface PiSessionMessage {
+  type: 'session' | 'message' | 'model_change' | 'thinking_level_change' | 'toolResult';
+  id: string;
+  parentId?: string | null;
+  timestamp: string;
+  message?: PiMessage;
+  provider?: string;
+  modelId?: string;
+  thinkingLevel?: string;
+  api?: string;
+  model?: string;
+  usage?: PiTokenUsage;
+  stopReason?: string;
+  cwd?: string;
+  version?: number;
+  toolCallId?: string;
+  toolName?: string;
+  content?: any[];
+  isError?: boolean;
+}
+
+export interface PiMessage {
+  role: 'user' | 'assistant' | 'toolResult';
+  content: PiContentBlock[];
+  timestamp?: number;
+}
+
+export interface PiContentBlock {
+  type: 'text' | 'toolCall';
+  text?: string;
+  id?: string;
+  name?: string;
+  arguments?: Record<string, unknown>;
+}
+
+export interface PiTokenUsage {
+  input: number;
+  output: number;
+  cacheRead: number;
+  cacheWrite: number;
+  totalTokens: number;
+  cost: {
+    input: number;
+    output: number;
+    cacheRead: number;
+    cacheWrite: number;
+    total: number;
+  };
+}
+
+/**
+ * Session source type
+ */
+export type SessionSource = 'claude' | 'pi' | 'all';
+
+/**
  * Search options
  */
 export interface SearchOptions {
@@ -106,4 +164,6 @@ export interface SearchOptions {
   tools?: string[];
   filePattern?: string;
   limit?: number;
+  source?: SessionSource;
+  directories?: string[];
 }
